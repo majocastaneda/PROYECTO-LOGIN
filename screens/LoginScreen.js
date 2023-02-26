@@ -1,8 +1,9 @@
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native'
 import React, { useState } from 'react'
 import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
+import { loginByUserAndPassword } from '../services/auth';
 
 const LoginScreen = ({}) => {
 
@@ -13,6 +14,20 @@ const LoginScreen = ({}) => {
   const [password, setPassword] = useState('');
   const [seePassword, setSeePassword] = useState(true);
   const [checkValidEmail, setCheckValidEmail] = useState(false);
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+
+  const handleLogin = async () => {
+    const res = await loginByUserAndPassword(email, password);
+    console.log(email);
+    console.log(password);
+    console.log(res);
+    if (res) {
+      setIsSuccessModalVisible(true);
+      Navigation.replace('Home');
+    } else {
+      console.log('Sin Datos');
+    }
+  };
 
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
@@ -24,6 +39,7 @@ const LoginScreen = ({}) => {
     } else {
       setCheckValidEmail(true);
     }
+    
   };
 
  
@@ -45,7 +61,12 @@ const LoginScreen = ({}) => {
             )}
       
       <View style={styles.wrapperInput}>
-      <TextInput placeholder="Contraseña" style={styles.userInput} autoCorrect={false} secureTextEntry={true} />
+      <TextInput 
+      placeholder="Contraseña" 
+      style={styles.userInput} 
+      value={password}
+      onChangeText={setPassword}
+      autoCorrect={false} secureTextEntry={true} />
       </View>
 
 
@@ -54,7 +75,7 @@ const LoginScreen = ({}) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => Navigation.replace('Home')}
+        onPress={handleLogin}
         style={{
           backgroundColor: "#574196",
           padding: 15,
@@ -75,6 +96,19 @@ const LoginScreen = ({}) => {
         </Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
+      <Modal
+        visible={isSuccessModalVisible}
+        animationType="fade"
+        transparent={true}
+        onRequestClose={() => setIsSuccessModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>¡Login exitoso!</Text>
+            <Button title="OK" onPress={() => setIsSuccessModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
