@@ -9,6 +9,7 @@ export const fetchsinToken = (endpoint, data, method = 'GET') => {
   if (method === 'GET') {
     return axios.get(url);
   } else {
+    console.log(data);
     return axios.post(url, data);
   }
 };
