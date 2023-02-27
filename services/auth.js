@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const loginByUserAndPassword = async (username, password) => {
     try {
-        const resp = await fetchsinToken('auth', { username, password }, 'POST');
+        const resp = await fetchsinToken('Login/auth', { username, password }, 'POST');
         //console.log(resp);
         console.log(resp);
 
@@ -23,7 +23,7 @@ export const loginByUserAndPassword = async (username, password) => {
 }
 export const renewToken = async () => {
 
-    const resp = await fetchconToken('Renew', null, 'POST');
+    const resp = await fetchconToken('Login/renew', null, 'POST');
 
     if (resp.ok) {
         if (resp.status === 200) {
