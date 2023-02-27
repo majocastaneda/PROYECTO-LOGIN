@@ -7,18 +7,14 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React from "react";
+import React, { Component } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
-import Carousel from "react-native-snap-carousel";
-import { sliderData } from "../model/data";
-import BannerSlider from "../components/BannerSlider";
+import MySwiper from '../components/Carousel';
 import { itemwidth, windowWidth } from "../util/Dimensions";
 
 export default function HomeScreen2() {
-  const renderBanner = ({ item, index }) => {
-    return <BannerSlider data={item} />;
-  };
+
 
   const profileImage = {
     uri: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -33,7 +29,7 @@ export default function HomeScreen2() {
             marginTop: 5,
             marginBottom: 20,
           }}
-          
+
         >
           <View>
             <Text
@@ -90,7 +86,7 @@ export default function HomeScreen2() {
           >
             Top de categorias
           </Text>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => { }}>
             <Text
               style={{
                 color: "#574196",
@@ -102,17 +98,15 @@ export default function HomeScreen2() {
             </Text>
           </TouchableOpacity>
         </View>
+        <View
+          style={{
+            height: 300,
+            borderRadius: 10,
+          }}>
+          <MySwiper
+          />
+        </View>
 
-        <Carousel
-          ref={(c) => {
-            this._carousel = c;
-          }}
-          data={sliderData}
-          renderItem={renderBanner}
-          sliderWidth={windowWidth - 40}
-          itemWidth={300}
-          loop={true}
-        />
 
         <View
         >
@@ -177,7 +171,7 @@ export default function HomeScreen2() {
             }}
           />
 
-<Image
+          <Image
             style={{
               width: 450,
               height: 150,
@@ -190,7 +184,7 @@ export default function HomeScreen2() {
             }}
           />
 
-<Image
+          <Image
             style={{
               width: 450,
               height: 150,
@@ -203,7 +197,7 @@ export default function HomeScreen2() {
             }}
           />
 
-<Image
+          <Image
             style={{
               width: 450,
               height: 150,
