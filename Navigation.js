@@ -80,7 +80,7 @@ const MyTabs = () => {
 const Navigation =() => {
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Welcome">
+            <Stack.Navigator initialRouteName="Register">
             <Stack.Screen 
                 name="Welcome" 
                 component={WelcomeScreen} 

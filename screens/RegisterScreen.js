@@ -17,6 +17,7 @@ const LoginScreen = ({ }) => {
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
   const [checkValidEmail, setCheckValidEmail] = useState(false);
+  const [checkValidPassword, setCheckValidPassword] = useState(false);
   const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');
   const [identification, setIdentification] = useState('');
@@ -74,6 +75,17 @@ const LoginScreen = ({ }) => {
     }
   };
 
+//Valida que la contraseña cumpla con los requisitos minimos de seguridad
+  const handleCheckPassword = (text) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    setPassword(text);
+    if (regex.test(text)) {
+      setCheckValidPassword(false);
+    } else {
+      setCheckValidPassword(true);
+    }
+  };
+
   const togglePasswordVisibility = () => {
     setHidePassword(!hidePassword);
   };
@@ -120,13 +132,17 @@ const LoginScreen = ({ }) => {
           placeholder="Contraseña"
           style={styles.userInput}
           autoCorrect={false}
+          onChangeText={handleCheckPassword}
           secureTextEntry={hidePassword}
-          onChangeText={(text) => setPassword(text)}
+//          onChangeText={(text) => setPassword(text)}
         />
         <TouchableOpacity onPress={togglePasswordVisibility}>
         <Icon name={hidePassword ? 'eye-slash' : 'eye'} size={20} />
       </TouchableOpacity>
       </View>
+      {checkValidPassword ? (
+  <Text style={styles.textoFallido}>La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número</Text>
+) : null}
 
       <View style={styles.wrapperInput}>
         <TextInput

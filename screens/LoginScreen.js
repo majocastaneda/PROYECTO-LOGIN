@@ -30,6 +30,7 @@ const LoginScreen = ({}) => {
     }
   };
 
+//Valida que el email contenga el simbolo @
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
     let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
