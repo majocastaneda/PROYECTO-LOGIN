@@ -41,10 +41,7 @@ const LoginScreen = ({ }) => {
 
   const handleRegisterUser = async () => {
     try {
-
-
       const response = await registerUser(
-
         name,
         lastname,
         email,
@@ -54,7 +51,6 @@ const LoginScreen = ({ }) => {
         gender,
         birthDate,
       );
-
       // Si todo va bien, se debería recibir la respuesta de la API aquí
       console.log(response);
     } catch (error) {
@@ -63,6 +59,8 @@ const LoginScreen = ({ }) => {
       console.log(email);
     }
   };
+
+
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
     let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
@@ -77,7 +75,7 @@ const LoginScreen = ({ }) => {
 
 //Valida que la contraseña cumpla con los requisitos minimos de seguridad
   const handleCheckPassword = (text) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
     setPassword(text);
     if (regex.test(text)) {
       setCheckValidPassword(false);
@@ -199,7 +197,7 @@ const LoginScreen = ({ }) => {
       </View>
 
       <TouchableOpacity onPress={() => Navigation.navigate('Login')}>
-        <Text style={styles.buttonText}>Ya estoy registrado</Text>
+        <Text style={styles.buttonText}> Ya estas registrado?  </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -248,8 +246,10 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: "#525050",
     margin: 10,
-    padding: 10
-
+    padding: 10,
+    fontWeight: '500',
+    color:"#574196",
+    textDecorationLine: 'underline'
   },
 
   wrapperInput: {

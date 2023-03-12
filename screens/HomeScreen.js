@@ -9,19 +9,39 @@ import {
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
-import MySwiper from '../components/Carousel';
-import * as Location from 'expo-location';
+import MySwiper from "../components/Carousel";
+import * as Location from "expo-location";
 import { useNavigation } from "@react-navigation/native";
-
-
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { fetchsinToken, fetchconToken } from "../services/api";
 
 export default function HomeScreen() {
-
+  const [userName, setUserName] = useState("");
   const Navigation = useNavigation();
 
-  const profileImage = {
-    uri: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=600",
+  useEffect(() => {
+    getName();
+  }, []);
+
+
+  const getName = async () => {
+    const resp = await fetchconToken("Login/renew", null, "POST");
+    //console.log(resp);
+    if (resp.status === 200) {
+      const userName = { token: resp.data.userName };
+      
+      return userName;
+    } else {
+      return null;
+    }
   };
+
+  const profileImage = {
+    uri: "https://cdn-icons-png.flaticon.com/512/149/149071.png?w=826&t=st=1678645625~exp=1678646225~hmac=96592ed0d08daf2920034e4eaf8d777ebe51ae301d54c6805a93462913b560a2",
+    //uri: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=600",
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#E5E5E5" }}>
       <ScrollView style={{ padding: 30 }}>
@@ -32,7 +52,6 @@ export default function HomeScreen() {
             marginTop: 5,
             marginBottom: 20,
           }}
-
         >
           <View>
             <Text
@@ -40,29 +59,30 @@ export default function HomeScreen() {
                 fontSize: 24,
               }}
             >
-              Hello Jane Doe
+              {userName ? `Hello ${userName}` : "Hello"}
             </Text>
-            <TouchableOpacity onPress={() => Navigation.navigate("CurrentAddress")}>
-            <Text
-              style={{
-                fontSize: 16,
-                color: "#574196",
-              }}
+            <TouchableOpacity
+              onPress={() => Navigation.navigate("CurrentAddress")}
             >
-              Dirección donde recibir el servicio
-            </Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: "#574196",
+                }}
+              >
+                Dirección donde recibir el servicio
+              </Text>
             </TouchableOpacity>
-            
           </View>
           <View>
             <TouchableOpacity
-            onPress={() => Navigation.navigate("EditProfile")}
+              onPress={() => Navigation.navigate("EditProfile")}
             >
-            <ImageBackground
-              source={profileImage}
-              style={{ width: 55, height: 55 }}
-              imageStyle={{ borderRadius: 25 }}
-            />
+              <ImageBackground
+                source={profileImage}
+                style={{ width: 55, height: 55 }}
+                imageStyle={{ borderRadius: 25 }}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -96,7 +116,7 @@ export default function HomeScreen() {
           >
             Top de categorias
           </Text>
-          <TouchableOpacity onPress={() => { }}>
+          <TouchableOpacity onPress={() => {}}>
             <Text
               style={{
                 color: "#574196",
@@ -112,14 +132,12 @@ export default function HomeScreen() {
           style={{
             height: 300,
             borderRadius: 10,
-          }}>
-          <MySwiper
-          />
+          }}
+        >
+          <MySwiper />
         </View>
 
-
-        <View
-        >
+        <View>
           <Text
             style={{
               fontSize: 20,
@@ -135,7 +153,7 @@ export default function HomeScreen() {
               height: 150,
               borderRadius: 10,
               padding: 5,
-              margin: 5
+              margin: 5,
             }}
             source={{
               uri: "https://images.pexels.com/photos/64609/pexels-photo-64609.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -148,7 +166,7 @@ export default function HomeScreen() {
               height: 150,
               borderRadius: 10,
               padding: 5,
-              margin: 5
+              margin: 5,
             }}
             source={{
               uri: "https://images.pexels.com/photos/2244746/pexels-photo-2244746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -161,7 +179,7 @@ export default function HomeScreen() {
               height: 150,
               borderRadius: 10,
               padding: 5,
-              margin: 5
+              margin: 5,
             }}
             source={{
               uri: "https://images.pexels.com/photos/2696064/pexels-photo-2696064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -174,7 +192,7 @@ export default function HomeScreen() {
               height: 150,
               borderRadius: 10,
               padding: 5,
-              margin: 5
+              margin: 5,
             }}
             source={{
               uri: "https://images.pexels.com/photos/209230/pexels-photo-209230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -187,7 +205,7 @@ export default function HomeScreen() {
               height: 150,
               borderRadius: 10,
               padding: 5,
-              margin: 5
+              margin: 5,
             }}
             source={{
               uri: "https://images.pexels.com/photos/4101143/pexels-photo-4101143.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -200,7 +218,7 @@ export default function HomeScreen() {
               height: 150,
               borderRadius: 10,
               padding: 5,
-              margin: 5
+              margin: 5,
             }}
             source={{
               uri: "https://images.pexels.com/photos/3823488/pexels-photo-3823488.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -213,7 +231,7 @@ export default function HomeScreen() {
               height: 150,
               borderRadius: 10,
               padding: 5,
-              margin: 5
+              margin: 5,
             }}
             source={{
               uri: "https://images.pexels.com/photos/4530187/pexels-photo-4530187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1r",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -7,6 +7,7 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import AccountScreen from "./screens/AccountScreen";
+import SellerAccountScreen from "./screens/SellerAccountScreen";
 import ServiceScreen from "./screens/ServiceScreen";
 import BookingScreen from "./screens/BookingScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -18,16 +19,23 @@ import AddressScreen from "./screens/AddressScreen";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const MyTabs = () => {
+const MyTabs = ({ token }) => {
+
+
     return (
-        <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: "#574196",
-      }}
-    >
+      <Tab.Navigator
+    screenOptions={{
+      style: {
+        height: 80,
+        backgroundColor: '#fff',
+      },
+      tabBarActiveTintColor: "#574196",
+    }}
+  >
       <Tab.Screen
-        name="Home"
+        name="userHomeTab"
         component={HomeScreen}
+        initialParams={{ token }} // pasa el token como prop
         options={{
          tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
@@ -39,6 +47,7 @@ const MyTabs = () => {
       <Tab.Screen
         name="Servicios"
         component={ServiceScreen}
+        initialParams={{ token }} // pasa el token como prop
         options={{
           tabBarLabel: "Top Services",
           tabBarIcon: ({ color, size }) => (
@@ -50,6 +59,7 @@ const MyTabs = () => {
       <Tab.Screen
         name="Bookings"
         component={BookingScreen}
+        initialParams={{ token }} // pasa el token como prop
         options={{
           tabBarLabel: "Bookings",
           tabBarIcon: ({ color, size }) => (
@@ -65,6 +75,7 @@ const MyTabs = () => {
       <Tab.Screen
         name="Account"
         component={AccountScreen}
+        initialParams={{ token }} // pasa el token como prop
         options={{
           tabBarLabel: "Account",
           tabBarIcon: ({ color, size }) => (
@@ -77,10 +88,99 @@ const MyTabs = () => {
     );
 }
 
+const SellerTabs = ({ token }) => {
+
+
+  return (
+    <Tab.Navigator
+    screenOptions={{
+      style: {
+        height: 80,
+        backgroundColor: '#fff',
+      },
+      tabBarActiveTintColor: "#574196",
+    }}
+  >
+    <Tab.Screen
+      name="SellerHomeTab"
+      component={SellerHomeScreen}
+      //initialParams={{ token }} // pasa el token como prop
+      options={{
+       tabBarLabel: "Home",
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="home" size={30} color={color} />
+        ),
+        headerShown: false,
+      }}
+    />
+    <Tab.Screen
+      name="Servicios"
+      component={ServiceScreen}
+      //initialParams={{ token }} // pasa el token como prop
+      options={{
+        tabBarLabel: "Requests",
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="star" size={30} color={color} />
+        ),
+        headerShown: false,
+      }}
+    />
+    <Tab.Screen
+      name="Bookings"
+      component={BookingScreen}
+      //initialParams={{ token }} // pasa el token como prop
+      options={{
+        tabBarLabel: "Calendar",
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons
+            name="calendar-heart"
+            size={30}
+            color={color}
+          />
+        ),
+        headerShown: false,
+      }}
+    />
+    <Tab.Screen
+      name="SellerAccount"
+      component={SellerAccountScreen}
+      //initialParams={{ token }} // pasa el token como prop
+      options={{
+        tabBarLabel: "Account",
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="account" size={30} color={color} />
+        ),
+        headerShown: false,
+      }}
+    />
+      </Tab.Navigator>
+  );
+}
+
 const Navigation =() => {
+
+  useEffect(() => {
+    const renew = async () => {
+      const newToken = await renewToken();
+      setIsLoading(false);
+      console.log(newToken);
+      if (newToken) {
+        setToken(newToken); // actualiza el estado con el nuevo token
+      } else {
+        // Aquí puedes hacer algo como redirigir a la pantalla de login
+      }
+    };
+    renew();
+  }, []);
+
+  if (isLoading) {
+    
+    return null;
+  }
+
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Register">
+            <Stack.Navigator initialRouteName="Welcome">
             <Stack.Screen 
                 name="Welcome" 
                 component={WelcomeScreen} 
@@ -115,7 +215,7 @@ const Navigation =() => {
                   }} />
                 <Stack.Screen 
                 name="SellerHome" 
-                component={SellerHomeScreen}
+                component={SellerTabs}
                 options={{
                     headerShown: false,
                   }} />

@@ -12,7 +12,7 @@ import {
   import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
   
-  export default function AccountScreen() {
+  export default function SellerAccountScreen() {
 
     const Navigation = useNavigation();
   
@@ -75,10 +75,10 @@ import { useNavigation } from "@react-navigation/native";
       </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={Styles.Botones} onPress={() => Navigation.navigate('SellerRegister')}>
+      <TouchableOpacity style={Styles.Botones} onPress={() => Navigation.replace('Home')}>
       <MaterialCommunityIcons name="account-group" size={30} color="#574196" />
         <Text style={Styles.textestilo}>
-          Convertirse en proveedor
+          Cambiar a perfil de usuario
         </Text>
       </TouchableOpacity>
 
