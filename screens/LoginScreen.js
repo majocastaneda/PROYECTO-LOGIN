@@ -4,6 +4,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { loginByUserAndPassword } from '../services/auth';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const LoginScreen = ({}) => {
 
@@ -12,7 +13,7 @@ const LoginScreen = ({}) => {
     //Estados Login
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [seePassword, setSeePassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true);
   const [checkValidEmail, setCheckValidEmail] = useState(false);
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
 
@@ -42,6 +43,10 @@ const LoginScreen = ({}) => {
     
   };
 
+  const togglePasswordVisibility = () => {
+    setHidePassword(!hidePassword);
+  };
+
  
   return (
     <View style={styles.container}>
@@ -60,19 +65,22 @@ const LoginScreen = ({}) => {
             <Text style={styles.textoFallido}> </Text>
             )}
       
-      <View style={styles.wrapperInput}>
+      <View 
+     style={styles.wrapperInput}
+
+      >
       <TextInput 
       placeholder="Contraseña" 
       style={styles.userInput} 
       value={password}
       onChangeText={setPassword}
-      autoCorrect={false} secureTextEntry={true} />
-      </View>
+      secureTextEntry={hidePassword}
+      autoCorrect={false}/>
 
-
-      <TouchableOpacity>
-          <Text style={styles.buttonText}>Olvidaste tu Contraseña?</Text>
+      <TouchableOpacity onPress={togglePasswordVisibility}>
+        <Icon name={hidePassword ? 'eye-slash' : 'eye'} size={20} />
       </TouchableOpacity>
+      </View>
 
       <TouchableOpacity
         onPress={handleLogin}
@@ -145,6 +153,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 10,
     height: 50,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   
   textoFallido:{

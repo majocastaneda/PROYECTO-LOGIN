@@ -15,7 +15,7 @@ const LoginScreen = ({ }) => {
   //Estados Login
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [seePassword, setSeePassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true);
   const [checkValidEmail, setCheckValidEmail] = useState(false);
   const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');
@@ -74,6 +74,10 @@ const LoginScreen = ({ }) => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setHidePassword(!hidePassword);
+  };
+
 
   return (
     <View style={styles.container}>
@@ -116,9 +120,12 @@ const LoginScreen = ({ }) => {
           placeholder="Contraseña"
           style={styles.userInput}
           autoCorrect={false}
-          secureTextEntry={true}
+          secureTextEntry={hidePassword}
           onChangeText={(text) => setPassword(text)}
         />
+        <TouchableOpacity onPress={togglePasswordVisibility}>
+        <Icon name={hidePassword ? 'eye-slash' : 'eye'} size={20} />
+      </TouchableOpacity>
       </View>
 
       <View style={styles.wrapperInput}>
@@ -237,6 +244,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     height: 40,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 
   textoFallido: {

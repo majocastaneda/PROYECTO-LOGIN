@@ -80,14 +80,8 @@ const MyTabs = () => {
 const Navigation =() => {
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
+            <Stack.Navigator initialRouteName="Welcome">
             <Stack.Screen 
-                name="Home" 
-                component={MyTabs}
-                options={{
-                    headerShown: false,
-                  }} />
-             <Stack.Screen 
                 name="Welcome" 
                 component={WelcomeScreen} 
                 options={{
@@ -107,6 +101,12 @@ const Navigation =() => {
                 options={{
                     headerShown: false,
                   }}/>
+                  <Stack.Screen 
+                name="Home" 
+                component={MyTabs}
+                options={{
+                    headerShown: false,
+                  }} />
               <Stack.Screen 
                 name="SellerRegister" 
                 component={SellerRegisterScreen}
