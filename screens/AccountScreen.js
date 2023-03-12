@@ -5,11 +5,9 @@ import {
     ScrollView,
     ImageBackground,
     TouchableOpacity,
-    Image,
     StyleSheet,
   } from "react-native";
   import React from "react";
-  import { TextInput } from "react-native-gesture-handler";
   import { MaterialIcons } from "@expo/vector-icons";
   import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
@@ -68,7 +66,7 @@ import { useNavigation } from "@react-navigation/native";
             </View>
 
           <View >
-          <TouchableOpacity style={Styles.Botones}>
+          <TouchableOpacity style={Styles.Botones} onPress={() => Navigation.navigate('EditProfile')}>
         <MaterialIcons name="settings" size={30} color='#574196' />
         <Text style={Styles.textestilo}>
           Configuraciones

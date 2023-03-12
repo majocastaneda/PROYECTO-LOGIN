@@ -12,6 +12,8 @@ import BookingScreen from "./screens/BookingScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SellerRegisterScreen from "./screens/SellerRegisterScreen";
 import SellerHomeScreen from "./screens/SellerHomeScreen";
+import EditProfileScreen from "./screens/EditProfileScreen";
+import AddressScreen from "./screens/AddressScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -78,7 +80,13 @@ const MyTabs = () => {
 const Navigation =() => {
     return(
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen 
+                name="Home" 
+                component={MyTabs}
+                options={{
+                    headerShown: false,
+                  }} />
              <Stack.Screen 
                 name="Welcome" 
                 component={WelcomeScreen} 
@@ -100,12 +108,6 @@ const Navigation =() => {
                     headerShown: false,
                   }}/>
               <Stack.Screen 
-                name="Home" 
-                component={MyTabs}
-                options={{
-                    headerShown: false,
-                  }} />
-                <Stack.Screen 
                 name="SellerRegister" 
                 component={SellerRegisterScreen}
                 options={{
@@ -114,6 +116,18 @@ const Navigation =() => {
                 <Stack.Screen 
                 name="SellerHome" 
                 component={SellerHomeScreen}
+                options={{
+                    headerShown: false,
+                  }} />
+                <Stack.Screen 
+                name="EditProfile" 
+                component={EditProfileScreen}
+                options={{
+                    headerShown: false,
+                  }} />
+                <Stack.Screen 
+                name="CurrentAddress" 
+                component={AddressScreen}
                 options={{
                     headerShown: false,
                   }} />

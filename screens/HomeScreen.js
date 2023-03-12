@@ -7,14 +7,17 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { Component } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 import MySwiper from '../components/Carousel';
-import { itemwidth, windowWidth } from "../util/Dimensions";
+import * as Location from 'expo-location';
+import { useNavigation } from "@react-navigation/native";
 
-export default function HomeScreen2() {
 
+
+export default function HomeScreen() {
+
+  const Navigation = useNavigation();
 
   const profileImage = {
     uri: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -39,21 +42,28 @@ export default function HomeScreen2() {
             >
               Hello Jane Doe
             </Text>
+            <TouchableOpacity onPress={() => Navigation.navigate("CurrentAddress")}>
             <Text
               style={{
                 fontSize: 16,
                 color: "#574196",
               }}
             >
-              Ignacio Asin y Antonio Roman
+              Dirección donde recibir el servicio
             </Text>
+            </TouchableOpacity>
+            
           </View>
           <View>
+            <TouchableOpacity
+            onPress={() => Navigation.navigate("EditProfile")}
+            >
             <ImageBackground
               source={profileImage}
               style={{ width: 55, height: 55 }}
               imageStyle={{ borderRadius: 25 }}
             />
+            </TouchableOpacity>
           </View>
         </View>
         <View
