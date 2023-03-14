@@ -15,6 +15,7 @@ import SellerRegisterScreen from "./screens/SellerRegisterScreen";
 import SellerHomeScreen from "./screens/SellerHomeScreen";
 import EditProfileScreen from "./screens/EditProfileScreen";
 import AddressScreen from "./screens/AddressScreen";
+import NewBookingScreen from "./screens/NewBookingScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -159,28 +160,11 @@ const SellerTabs = ({ token }) => {
 
 const Navigation =() => {
 
-  useEffect(() => {
-    const renew = async () => {
-      const newToken = await renewToken();
-      setIsLoading(false);
-      console.log(newToken);
-      if (newToken) {
-        setToken(newToken); // actualiza el estado con el nuevo token
-      } else {
-        // Aquí puedes hacer algo como redirigir a la pantalla de login
-      }
-    };
-    renew();
-  }, []);
-
-  if (isLoading) {
-    
-    return null;
-  }
+  
 
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Welcome">
+            <Stack.Navigator initialRouteName="Login">
             <Stack.Screen 
                 name="Welcome" 
                 component={WelcomeScreen} 
@@ -228,6 +212,12 @@ const Navigation =() => {
                 <Stack.Screen 
                 name="CurrentAddress" 
                 component={AddressScreen}
+                options={{
+                    headerShown: false,
+                  }} />
+                <Stack.Screen 
+                name="NewBooking" 
+                component={NewBookingScreen}
                 options={{
                     headerShown: false,
                   }} />

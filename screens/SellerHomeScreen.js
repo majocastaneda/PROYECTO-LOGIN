@@ -43,7 +43,7 @@ export default function SellerHomeScreen() {
                 fontSize: 24,
               }}
             >
-              {name ? `Hello ${name}` : "Hello"}
+              {userName ? `Hello ${userName}` : "Hello"}
             </Text>
 
           </View>
