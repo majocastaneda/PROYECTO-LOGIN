@@ -2,7 +2,7 @@ import { fetchconToken } from "./api";
 
 export const getAllAddress = async () => {
  
-    const resp = await fetchconToken('User/addresses');
+    const resp = await fetchconToken('User/adresses');
     //console.log(resp);
     
         if (resp.status === 200) {

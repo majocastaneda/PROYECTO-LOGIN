@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ToastAndroid,
 } from "react-native";
 import React, { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
@@ -11,7 +12,6 @@ import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { loginByUserAndPassword } from "../services/auth";
 import Icon from "react-native-vector-icons/FontAwesome";
-import Modal from "react-native-modal";
 
 const LoginScreen = ({}) => {
   const Navigation = useNavigation();
@@ -21,7 +21,6 @@ const LoginScreen = ({}) => {
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [checkValidEmail, setCheckValidEmail] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
   const handleLogin = async () => {
     const res = await loginByUserAndPassword(email, password);
@@ -29,15 +28,12 @@ const LoginScreen = ({}) => {
     console.log(password);
     console.log(res);
     if (res) {
-      setModalVisible(true);
+     
       Navigation.navigate("Home");
-     setTimeout(() => {
-     setModalVisible(false);
-  }, 5000); 
-      
-      // Oculta el popup después de 3 segundos
+    
     } else {
-      console.log("Sin Datos");
+     
+      ToastAndroid.show("Error de inicio de sesión. Verifique su email o contraseña", ToastAndroid.SHORT);
     }
   };
 
@@ -117,14 +113,6 @@ const LoginScreen = ({}) => {
       </TouchableOpacity>
       <StatusBar style="auto" />
 
-      <Modal isVisible={modalVisible}>
-        <View style={{ backgroundColor: "white", padding: 20 }}>
-          <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 10 }}>
-            ¡Ingreso exitoso!
-          </Text>
-          <Button title="Cerrar" onPress={() => setModalVisible(false)} />
-        </View>
-      </Modal>
     </View>
   );
 };

@@ -1,5 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View, Text, ImageBackground } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
 
 const slides = [
@@ -9,15 +11,18 @@ const slides = [
   },
   {
     image: require('../assets/images/home/constructor.png'),
-    title: 'Slide 2',
+    title: 'Construcción',
   },
   {
     image: require('../assets/images/home/electricista.png'),
-    title: 'Slide 3',
+    title: 'Electricista',
   },
 ];
 
 export default function MySwiper() {
+
+  const navigation = useNavigation();
+
   return (
     <Swiper style={styles.wrapper} showsButtons={true} loop={true}>
       {slides.map((slide, index) => (

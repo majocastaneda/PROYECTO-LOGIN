@@ -21,10 +21,11 @@ export const loginByUserAndPassword = async (username, password) => {
       return null;
     }
   } catch (error) {
-    console.error(error);
+    //console.error(error);
     return null;
   }
 };
+
 export const renewToken = async () => {
   const resp = await fetchconToken("Login/renew", null, "POST");
 

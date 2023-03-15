@@ -14,6 +14,7 @@ const SellerRegisterScreen = ({}) => {
   const [ServName, setServName] = useState("");
   const [Description, setDescription] = useState("");
   const [CategoryId, setCategoryId] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSellerRegister = async () => {
     try {
@@ -80,9 +81,8 @@ const SellerRegisterScreen = ({}) => {
           style={styles.userInput}
           autoCorrect={false}
           onChangeText={(text) => setDescription(text)}
-          TextInputConfig={{
-            multiline: true,
-          }}
+          multiline={true}
+          numberOfLines={5}
         />
       </View>
 
@@ -184,5 +184,13 @@ const styles = StyleSheet.create({
     color: "#F10D0D",
     marginRight: 50,
     marginTop: 5,
+  },
+
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20,
   },
 });

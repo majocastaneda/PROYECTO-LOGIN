@@ -16,6 +16,9 @@ import SellerHomeScreen from "./screens/SellerHomeScreen";
 import EditProfileScreen from "./screens/EditProfileScreen";
 import AddressScreen from "./screens/AddressScreen";
 import NewBookingScreen from "./screens/NewBookingScreen";
+import NewAddress from "./screens/NewAddress";
+import AboutScreen from "./screens/AboutScreen";
+import SupportScreen from "./screens/SupportScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -210,6 +213,12 @@ const Navigation =() => {
                     headerShown: false,
                   }} />
                 <Stack.Screen 
+                name="NewAddress" 
+                component={NewAddress}
+                options={{
+                    headerShown: false,
+                  }} />
+                <Stack.Screen 
                 name="CurrentAddress" 
                 component={AddressScreen}
                 options={{
@@ -218,6 +227,18 @@ const Navigation =() => {
                 <Stack.Screen 
                 name="NewBooking" 
                 component={NewBookingScreen}
+                options={{
+                    headerShown: false,
+                  }} />
+                <Stack.Screen 
+                name="Soporte" 
+                component={SupportScreen}
+                options={{
+                    headerShown: false,
+                  }} />
+                <Stack.Screen 
+                name="Acerca" 
+                component={AboutScreen}
                 options={{
                     headerShown: false,
                   }} />

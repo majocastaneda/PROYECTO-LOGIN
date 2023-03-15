@@ -12,9 +12,18 @@ export default function EditProfileScreen() {
     <View
     style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
     >
-      <Text>EditProfileScreen</Text>
+      <Text style={styles.title}>En construcción....🛠️</Text>
     </View>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: 'center',
+    color: "#574196",
+    
+  },
+})

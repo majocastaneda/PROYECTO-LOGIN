@@ -93,23 +93,6 @@ const doGetAllAddress = async () => {
             mode="date"
             display="default"
             onChange={handleDateSelect}
-            theme={{
-              backgroundColor: "#574196",
-              calendarBackground: "#574196",
-              textDayFontColor: "#000000",
-              textMonthFontColor: "#000000",
-              textDayHeaderFontColor: "#000000",
-              textDisabledColor: "#CCCCCC",
-              todayBackgroundColor: "#000000",
-              todayTextColor: "#FFFFFF",
-              arrowColor: "#000000",
-              disabledArrowColor: "#CCCCCC",
-              monthTextColor: "#000000",
-              indicatorColor: "#000000",
-              textDayFontSize: 16,
-              textMonthFontSize: 16,
-              textDayHeaderFontSize: 16,
-            }}
           />
         )}
       </View>

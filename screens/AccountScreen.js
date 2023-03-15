@@ -42,7 +42,7 @@ import { useNavigation } from "@react-navigation/native";
                   
                 }}
               >
-                Hello Jane Doe
+                Hola
               </Text>
             </View>
 
@@ -85,6 +85,7 @@ import { useNavigation } from "@react-navigation/native";
 
       <TouchableOpacity
         style={Styles.Botones}
+        onPress={() => Navigation.navigate('Bookings')}
       >
         <MaterialCommunityIcons name="calendar-check" size={30} color="#574196" />
         <Text style={Styles.textestilo}>
@@ -94,6 +95,7 @@ import { useNavigation } from "@react-navigation/native";
 
       <TouchableOpacity
         style={Styles.Botones}
+        onPress={() => Navigation.navigate('Soporte')}
       >
         <MaterialIcons name="contact-support" size={30} color="#574196" />
         <Text style={Styles.textestilo}>
@@ -103,6 +105,7 @@ import { useNavigation } from "@react-navigation/native";
 
       <TouchableOpacity
         style={Styles.Botones}
+        onPress={() => Navigation.navigate('Acerca')}
       >
         <MaterialCommunityIcons name="dots-horizontal" size={30} color="#574196" />
         <Text style={Styles.textestilo}>

@@ -13,12 +13,10 @@ import MySwiper from "../components/Carousel";
 import * as Location from "expo-location";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { fetchsinToken, fetchconToken } from "../services/api";
+
 
 export default function SellerHomeScreen() {
 
-  const [userName, setUserName] = useState("");
   const Navigation = useNavigation();
 
   const profileImage = {
@@ -43,7 +41,7 @@ export default function SellerHomeScreen() {
                 fontSize: 24,
               }}
             >
-              {userName ? `Hello ${userName}` : "Hello"}
+              Hello
             </Text>
 
           </View>

@@ -1,10 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View, Button } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Button, ToastAndroid, } from "react-native";
 import React, { useEffect, useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { registerAddress } from "../services/address";
-import Modal from "react-native-modal";
 
 export default function AddressScreen() {
   const Navigation = useNavigation();
@@ -14,23 +13,21 @@ export default function AddressScreen() {
   const [main, setMain] = useState("");
   const [secondary, setSecondary] = useState("");
   const [city, setCity] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
-
-  useEffect(() => {
-    if (modalVisible) {
-      setName("");
-      setMain("");
-      setSecondary("");
-      setCity("");
-    }
-  }, [modalVisible]);
 
   const handleRegisterAddress = async () => {
     try {
+
+      if (!name || !main || !secondary || !city) {
+        // Si algún campo está vacío, muestra un mensaje de error y no continúa
+        ToastAndroid.show("Por favor completa todos los campos", ToastAndroid.SHORT);
+        return;
+      }
+
       const response = await registerAddress(name, main, secondary, city);
       // Si todo va bien, se debería recibir la respuesta de la API aquí
       console.log(response);
-      setModalVisible(true);
+      Navigation.replace("Home");
+      ToastAndroid.show("Dirección guardada correctamente", ToastAndroid.SHORT);
     } catch (error) {
       // Si algo falla, se captura el error aquí
       console.error(error);
@@ -52,6 +49,7 @@ export default function AddressScreen() {
           style={styles.userInput}
           autoCorrect={false}
           onChangeText={(text) => setName(text)}
+          required={true}
         />
       </View>
 
@@ -61,6 +59,7 @@ export default function AddressScreen() {
           style={styles.userInput}
           autoCorrect={false}
           onChangeText={(text) => setMain(text)}
+          required={true}
         />
       </View>
 
@@ -70,6 +69,7 @@ export default function AddressScreen() {
           style={styles.userInput}
           autoCorrect={false}
           onChangeText={(text) => setSecondary(text)}
+          required={true}
         />
       </View>
 
@@ -79,6 +79,7 @@ export default function AddressScreen() {
           style={styles.userInput}
           autoCorrect={false}
           onChangeText={(text) => setCity(text)}
+          required={true}
         />
       </View>
 
@@ -104,15 +105,7 @@ export default function AddressScreen() {
         </Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
-
-      <Modal isVisible={modalVisible}>
-        <View style={{ backgroundColor: "white", padding: 20 }}>
-          <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 10 }}>
-            ¡Direccion guardada exitosamente!
-          </Text>
-          <Button title="Cerrar" onPress={() => setModalVisible(false)} />
-        </View>
-      </Modal>
+      
     </View>
   );
 }

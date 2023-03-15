@@ -47,7 +47,7 @@ export default function HomeScreen() {
     return (
       <TouchableOpacity onPress={handleCardPress}>
       <Card>
-        <Card.Image source={ profileImage } style={{ width: '100%', height: 200 }} />
+        <Card.Image source={ servicesImage } style={{ width: '100%', height: 200 }} />
         <Card.Title>{item.servName}</Card.Title>
         <Text>{item.description}</Text>
         
@@ -60,6 +60,10 @@ export default function HomeScreen() {
   const profileImage = {
     uri: "https://cdn-icons-png.flaticon.com/512/149/149071.png?w=826&t=st=1678645625~exp=1678646225~hmac=96592ed0d08daf2920034e4eaf8d777ebe51ae301d54c6805a93462913b560a2",
     //uri: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=600",
+  };
+
+  const servicesImage = {
+    uri: "https://pladufel.com/wp-content/uploads/2018/03/pladufel-pladur-y-reformas-integrales-servicios-varios-2.jpg",
   };
 
   return (
@@ -85,21 +89,23 @@ export default function HomeScreen() {
                   fontSize: 24,
                 }}
               >
-                Hello
+                Hola
               </Text>
-              <TouchableOpacity onPress={() => Navigation.navigate("CurrentAddress")}>
+              <TouchableOpacity onPress={() => Navigation.navigate("NewAddress")}>
                 <Text
                   style={{
                     fontSize: 16,
                     color: "#574196",
+                    textDecorationLine: "underline"
                   }}
                 >
-                  Dirección donde recibir el servicio
+                  Ingresa aquí tus direcciones
                 </Text>
               </TouchableOpacity>
             </View>
+
             <View>
-              <TouchableOpacity onPress={() => Navigation.navigate("EditProfile")}>
+              <TouchableOpacity onPress={() => Navigation.navigate("Account")}>
                 <ImageBackground
                   source={profileImage}
                   style={{ width: 55, height: 55 }}
@@ -108,6 +114,7 @@ export default function HomeScreen() {
               </TouchableOpacity>
             </View>
           </View>
+
           <View
             style={{
               flexDirection: "row",
@@ -137,7 +144,7 @@ export default function HomeScreen() {
             >
               Top de categorias
             </Text>
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => Navigation.navigate("Servicios")}>
               <Text
                 style={{
                   color: "#574196",
